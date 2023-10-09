@@ -1,3 +1,3 @@
-# Bernardo
+# The Big Heist
 
-funny game where you grind your balls off for stuff
+a 2d stealth game where you complete missions for your big crime boss
