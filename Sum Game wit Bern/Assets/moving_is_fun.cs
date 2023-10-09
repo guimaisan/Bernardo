@@ -13,17 +13,10 @@ public class moving_is_fun : MonoBehaviour
         
     
     }
-    
-
-
-
-
-
-
 
     // Update is called once per frame
     void Update()
-    {
+    {   //adding movement for B E A N
         if (Input.GetKey(KeyCode.UpArrow))
         {
             pos.position += Vector3.up * Time.deltaTime * movSpeed;
