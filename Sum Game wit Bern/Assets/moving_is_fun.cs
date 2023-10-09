@@ -28,5 +28,20 @@ public class moving_is_fun : MonoBehaviour
         {
             pos.position += Vector3.up * Time.deltaTime * movSpeed;
         }
+
+        if (Input.GetKey(KeyCode.DownArrow))
+        {
+            pos.position += Vector3.down * Time.deltaTime * movSpeed;
+        }
+
+        if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            pos.position += Vector3.left * Time.deltaTime * movSpeed;
+        }
+
+        if (Input.GetKey(KeyCode.RightArrow))
+        {
+            pos.position += Vector3.right * Time.deltaTime * movSpeed;
+        }
     }
 }
