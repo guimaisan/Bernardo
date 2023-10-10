@@ -24,7 +24,19 @@ public class Movement : MonoBehaviour
         {
             moveX = -1f;
         }
-        Vector3 movDir = new Vector3(moveX, moveY).normalized;
+        if (Input.GetKey(KeyCode.D))
+        {
+            moveX = 1f;
+        }
+        if (Input.GetKey(KeyCode.W))
+        {
+            moveY = 1f;
+        }
+        if (Input.GetKey(KeyCode.S))
+        {
+            moveY = -1f;
+        }
+        moveDir = new Vector3(moveX, moveY).normalized;
 
         Rigidbody.MovePosition(transform.position + moveDir * movSpeed);
     }
