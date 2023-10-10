@@ -4,30 +4,35 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    public float movSpeed;
+    Rigidbody2D Rigidbody;
+    float movSpeed;
+    Vector3 moveDir;  
     // Start is called before the first frame update
     void Start()
     {
+        Rigidbody = GetComponent<Rigidbody2D>();
         movSpeed = 2;
+        
     }
     // Update is called once per frame
     void Update()
-    {   //making WASD movement
-        if (Input.GetKey(KeyCode.W))
-        {
-            transform.position += Vector3.up * Time.deltaTime * movSpeed;
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            transform.position += Vector3.down * Time.deltaTime * movSpeed;
-        }
+    {
+        float moveX = 0f;
+        float moveY = 0f;
+
         if (Input.GetKey(KeyCode.A))
         {
-            transform.position += Vector3.left * Time.deltaTime * movSpeed;
+            moveX = -1f;
         }
-        if (Input.GetKey(KeyCode.D))
-        {
-            transform.position += Vector3.right * Time.deltaTime * movSpeed;
-        }
+        Vector3 movDir = new Vector3(moveX, moveY).normalized;
+
+        Rigidbody.MovePosition(transform.position + moveDir * movSpeed);
     }
+
+    private void FixedUpdate()
+    {
+        GetComponent<Rigidbody2D>().MovePosition(transform.position + moveDir * movSpeed * Time.fixedDeltaTime);
+    }
+
+
 }
