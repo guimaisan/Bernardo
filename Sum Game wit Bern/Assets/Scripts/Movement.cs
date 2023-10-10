@@ -37,8 +37,8 @@ public class Movement : MonoBehaviour
             moveY = -1f;
         }
         moveDir = new Vector3(moveX, moveY).normalized;
-
-        Rigidbody.MovePosition(transform.position + moveDir * movSpeed);
+       
+       
     }
 
     private void FixedUpdate()
