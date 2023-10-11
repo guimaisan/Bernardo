@@ -1,15 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class Movement : MonoBehaviour
 {
     Rigidbody2D Rigidbody;
     float movSpeed;
-    Vector3 moveDir;  
+    Vector3 moveDir;
+    PhotonView view;
     // Start is called before the first frame update
     void Start()
     {
+        view = GetComponent<PhotonView>();
         Rigidbody = GetComponent<Rigidbody2D>();
         movSpeed = 2;
         
@@ -19,31 +22,35 @@ public class Movement : MonoBehaviour
     {
         float moveX = 0f;
         float moveY = 0f;
-
-        if (Input.GetKey(KeyCode.A))
+        if (view.IsMine)
         {
-            moveX = -1f;
+            if (Input.GetKey(KeyCode.A))
+            {
+                moveX = -1f;
+            }
+            if (Input.GetKey(KeyCode.D))
+            {
+                moveX = 1f;
+            }
+            if (Input.GetKey(KeyCode.W))
+            {
+                moveY = 1f;
+            }
+            if (Input.GetKey(KeyCode.S))
+            {
+                moveY = -1f;
+            }
+            moveDir = new Vector3(moveX, moveY).normalized;
         }
-        if (Input.GetKey(KeyCode.D))
-        {
-            moveX = 1f;
-        }
-        if (Input.GetKey(KeyCode.W))
-        {
-            moveY = 1f;
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            moveY = -1f;
-        }
-        moveDir = new Vector3(moveX, moveY).normalized;
-       
        
     }
 
     private void FixedUpdate()
     {
-        GetComponent<Rigidbody2D>().MovePosition(transform.position + moveDir * movSpeed * Time.fixedDeltaTime);
+        if (view.IsMine)
+        {
+            GetComponent<Rigidbody2D>().MovePosition(transform.position + moveDir * movSpeed * Time.fixedDeltaTime);
+        }
     }
 
 
